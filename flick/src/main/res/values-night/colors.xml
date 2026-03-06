@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="flick_primary">#7DD3FC</color>
+    <color name="flick_on_primary">#003549</color>
+    <color name="flick_primary_container">#004D6F</color>
+    <color name="flick_on_primary_container">#C8E6F5</color>
+    <color name="flick_secondary">#38BDF8</color>
+    <color name="flick_surface">#0F172A</color>
+    <color name="flick_on_surface">#E2E8F0</color>
+    <color name="flick_on_surface_variant">#94A3B8</color>
+    <color name="flick_outline">#334155</color>
+</resources>

@@ -1,0 +1,3 @@
+-keep class com.serendeep.flick.** { *; }
+-keep class org.bouncycastle.** { *; }
+-dontwarn org.bouncycastle.**

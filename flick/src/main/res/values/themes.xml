@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Flick" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/flick_primary</item>
+        <item name="colorOnPrimary">@color/flick_on_primary</item>
+        <item name="colorPrimaryContainer">@color/flick_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/flick_on_primary_container</item>
+        <item name="colorSecondary">@color/flick_secondary</item>
+        <item name="colorSurface">@color/flick_surface</item>
+        <item name="colorOnSurface">@color/flick_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/flick_on_surface_variant</item>
+        <item name="colorOutline">@color/flick_outline</item>
+    </style>
+
+    <style name="Theme.Flick.Transparent" parent="Theme.Flick">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+</resources>

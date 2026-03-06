@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+apply plugin: 'dagger.hilt.android.plugin'
+
+def packageName = "com.serendeep.flick"
+
+android {
+    compileSdk 35
+
+    namespace packageName
+
+    defaultConfig {
+        applicationId "${packageName}"
+        minSdkVersion 26
+        targetSdkVersion 35
+        versionCode 1
+        versionName "0.1.0"
+    }
+
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        resources {
+            excludes += [
+                    '/org/bouncycastle/pqc/**/*.properties',
+                    'META-INF/versions/9/OSGI-INF/MANIFEST.MF'
+            ]
+        }
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        abortOnError true
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources true
+        }
+    }
+}
+
+def guavaVersion = '33.4.8'
+def hiltVersion = '2.56.2'
+def junitVersion = '4.13.2'
+
+dependencies {
+    annotationProcessor "com.google.dagger:hilt-compiler:$hiltVersion"
+
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation "androidx.biometric:biometric:1.1.0"
+    implementation 'androidx.core:core:1.16.0'
+    implementation "androidx.preference:preference:1.2.1"
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    implementation "com.google.guava:guava:${guavaVersion}-android"
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'org.bouncycastle:bcprov-jdk18on:1.80'
+    implementation 'org.json:json:20250517'
+
+    testImplementation "junit:junit:${junitVersion}"
+    testImplementation 'org.robolectric:robolectric:4.14.1'
+    testImplementation 'androidx.test:core:1.6.1'
+}
