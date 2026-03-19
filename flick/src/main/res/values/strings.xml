@@ -13,4 +13,12 @@
     <string name="accessibility_service_description">Flick reads the current app name and browser URL to suggest matching OTP codes.</string>
     <string name="action_copy">Copy</string>
     <string name="action_dismiss">Dismiss</string>
+    <string name="setup_step_urls">3. URL mappings (optional)</string>
+    <string name="setup_step_urls_desc">Map specific URLs to vault entries for better matching in browsers.</string>
+    <string name="setup_manage_urls">Manage URL Mappings</string>
+    <string name="url_mappings_title">URL Mappings</string>
+    <string name="url_mappings_empty">No custom mappings. Auto-detection will be used for all URLs.</string>
+    <string name="url_mappings_add">Add Mapping</string>
+    <string name="url_mappings_url_hint">URL pattern (e.g. mail.uni-marburg.de)</string>
+    <string name="url_mappings_select_entry">Select OTP entry</string>
 </resources>

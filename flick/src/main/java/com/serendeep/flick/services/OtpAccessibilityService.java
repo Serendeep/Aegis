@@ -12,6 +12,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import com.serendeep.flick.otp.EntryMatcher;
 import com.serendeep.flick.ui.QuickAuthActivity;
 import com.serendeep.flick.ui.views.OtpBubbleView;
+import com.serendeep.flick.vault.UrlMappingStore;
 import com.serendeep.flick.vault.VaultEntry;
 import com.serendeep.flick.vault.VaultHolder;
 
@@ -27,6 +28,7 @@ public class OtpAccessibilityService extends AccessibilityService
         implements OtpBubbleView.AuthCallback, VaultHolder.LockStateListener {
 
     @Inject VaultHolder _vaultHolder;
+    @Inject UrlMappingStore _urlMappingStore;
 
     private OtpBubbleView _bubbleView;
     private String _lastMatchedPkg = "";
@@ -133,7 +135,7 @@ public class OtpAccessibilityService extends AccessibilityService
 
         if (pkg.equals(_lastMatchedPkg) && !isBrowser) return;
 
-        EntryMatcher matcher = new EntryMatcher(_vaultHolder.getEntries());
+        EntryMatcher matcher = new EntryMatcher(_vaultHolder.getEntries(), _urlMappingStore.getAllMappings());
         List<VaultEntry> matches;
 
         if (isBrowser) {

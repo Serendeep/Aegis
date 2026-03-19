@@ -35,6 +35,11 @@
         </service>
 
         <activity
+            android:name=".ui.UrlMappingsActivity"
+            android:theme="@style/Theme.Flick"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.QuickAuthActivity"
             android:theme="@style/Theme.Flick.Transparent"
             android:excludeFromRecents="true"

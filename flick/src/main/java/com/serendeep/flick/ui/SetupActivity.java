@@ -56,6 +56,11 @@ public class SetupActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        findViewById(R.id.btn_manage_urls).setOnClickListener(v -> {
+            Intent intent = new Intent(this, UrlMappingsActivity.class);
+            startActivity(intent);
+        });
+
         if (_vaultAccess.hasVaultUri()) {
             showAccessibilityStep();
         }
@@ -117,5 +122,6 @@ public class SetupActivity extends AppCompatActivity {
 
     private void showAccessibilityStep() {
         findViewById(R.id.card_accessibility).setVisibility(View.VISIBLE);
+        findViewById(R.id.card_url_mappings).setVisibility(View.VISIBLE);
     }
 }

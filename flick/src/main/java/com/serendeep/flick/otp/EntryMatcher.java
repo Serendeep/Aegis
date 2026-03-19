@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class EntryMatcher {
     private final List<VaultEntry> _entries;
+    private final Map<String, String> _urlMappings;
 
     private static final Map<String, String> PACKAGE_MAP = new HashMap<>();
     private static final Map<String, String> DOMAIN_MAP = new HashMap<>();
@@ -47,6 +48,12 @@ public class EntryMatcher {
 
     public EntryMatcher(List<VaultEntry> entries) {
         _entries = entries;
+        _urlMappings = Collections.emptyMap();
+    }
+
+    public EntryMatcher(List<VaultEntry> entries, Map<String, String> urlMappings) {
+        _entries = entries;
+        _urlMappings = urlMappings != null ? urlMappings : Collections.emptyMap();
     }
 
     public List<VaultEntry> matchByPackage(String packageName) {
@@ -78,7 +85,16 @@ public class EntryMatcher {
             return Collections.emptyList();
         }
 
-        String domain = extractDomain(domainOrUrl.toLowerCase(Locale.ROOT));
+        String input = domainOrUrl.toLowerCase(Locale.ROOT);
+
+        if (!_urlMappings.isEmpty()) {
+            VaultEntry mapped = findByCustomMapping(input);
+            if (mapped != null) {
+                return Collections.singletonList(mapped);
+            }
+        }
+
+        String domain = extractDomain(input);
         if (domain == null) {
             return Collections.emptyList();
         }
@@ -129,6 +145,21 @@ public class EntryMatcher {
         }
 
         return Collections.emptyList();
+    }
+
+    private VaultEntry findByCustomMapping(String rawUrl) {
+        for (Map.Entry<String, String> mapping : _urlMappings.entrySet()) {
+            String stored = mapping.getKey().toLowerCase(Locale.ROOT);
+            if (rawUrl.contains(stored)) {
+                String uuid = mapping.getValue();
+                for (VaultEntry entry : _entries) {
+                    if (entry.getUuid().equals(uuid)) {
+                        return entry;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     private List<VaultEntry> findByIssuerKeyword(String keyword) {
