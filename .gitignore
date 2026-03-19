@@ -41,3 +41,17 @@ captures/
 *.jks
 crowdin.properties
 .crowdin/config.yml
+
+# Claude Code
+.claude/
+
+# Plans
+docs/plans/
+
+# macOS
+.DS_Store
+
+# Firefox extension artifacts
+firefox/web-ext-artifacts/
+firefox/*.xpi
+firefox/.amo-upload-uuid

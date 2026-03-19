@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Flick — Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Flick Settings</h1>
+    <p class="subtitle">Aegis OTP for Firefox</p>
+
+    <section class="card">
+      <h2>Vault</h2>
+
+      <div id="status-no-vault" class="status">
+        <span class="status-dot red"></span>
+        <span>No vault imported</span>
+      </div>
+
+      <div id="status-has-vault" class="status" hidden>
+        <span class="status-dot green"></span>
+        <span id="vault-info">Vault imported</span>
+      </div>
+
+      <div class="actions">
+        <label class="btn btn-primary" id="import-btn">
+          Import Aegis Backup
+          <input type="file" id="file-input" accept=".json" hidden>
+        </label>
+        <button class="btn btn-danger" id="remove-btn" hidden>Remove Vault</button>
+      </div>
+
+      <p id="error-msg" class="error" hidden></p>
+      <p id="success-msg" class="success" hidden></p>
+    </section>
+
+    <section class="card">
+      <h2>About</h2>
+      <p>Flick reads your encrypted Aegis vault backup and provides OTP codes directly in Firefox. Your vault stays encrypted in extension storage and is only decrypted in memory when you enter your password.</p>
+      <p class="muted">The vault auto-locks after 5 minutes of inactivity.</p>
+    </section>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

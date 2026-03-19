@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- No vault -->
+  <div id="view-no-vault" class="view" hidden>
+    <div class="empty-state">
+      <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <p>No vault imported</p>
+      <button class="btn btn-link" id="open-settings">Open Settings</button>
+    </div>
+  </div>
+
+  <!-- Locked -->
+  <div id="view-locked" class="view" hidden>
+    <div class="lock-header">
+      <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      <span class="lock-title">Flick</span>
+    </div>
+    <form id="unlock-form">
+      <input type="password" id="password-input" placeholder="Vault password" autocomplete="off" autofocus>
+      <button type="submit" class="btn btn-primary btn-full" id="unlock-btn">Unlock</button>
+    </form>
+    <p id="unlock-error" class="error" hidden></p>
+  </div>
+
+  <!-- Unlocked -->
+  <div id="view-unlocked" class="view" hidden>
+    <div class="toolbar">
+      <input type="text" id="search-input" placeholder="Search entries..." autocomplete="off">
+      <button class="btn btn-icon" id="lock-btn" title="Lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </button>
+    </div>
+    <div id="entries-list" class="entries-list"></div>
+    <div id="no-matches" class="empty-state small" hidden>
+      <p>No matching entries</p>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

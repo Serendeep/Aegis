@@ -1,0 +1,268 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  width: 350px;
+  min-height: 100px;
+  max-height: 500px;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  font-size: 14px;
+}
+
+.view {
+  padding: 16px;
+}
+
+/* --- Empty state --- */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 32px 16px;
+  text-align: center;
+  color: #888;
+}
+
+.empty-state.small {
+  padding: 16px;
+}
+
+.empty-icon {
+  width: 48px;
+  height: 48px;
+  color: #555;
+}
+
+/* --- Lock view --- */
+
+.lock-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-top: 8px;
+}
+
+.lock-icon {
+  width: 28px;
+  height: 28px;
+  color: #5c7cfa;
+}
+
+.lock-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+#unlock-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="password"],
+input[type="text"] {
+  background: #16213e;
+  border: 1px solid #1f3460;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+input[type="password"]:focus,
+input[type="text"]:focus {
+  border-color: #5c7cfa;
+}
+
+/* --- Buttons --- */
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primary {
+  background: #5c7cfa;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.btn-primary:hover { background: #4c6ef5; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-full { width: 100%; }
+
+.btn-link {
+  background: none;
+  color: #5c7cfa;
+  padding: 6px;
+  font-size: 13px;
+}
+
+.btn-link:hover { text-decoration: underline; }
+
+.btn-icon {
+  background: transparent;
+  color: #888;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-icon:hover { color: #fff; }
+
+.error {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* --- Toolbar --- */
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.toolbar input {
+  flex: 1;
+}
+
+/* --- Entry cards --- */
+
+.entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.entry-card {
+  background: #16213e;
+  border: 1px solid #1f3460;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color 0.15s;
+}
+
+.entry-card:hover {
+  border-color: #5c7cfa;
+}
+
+.entry-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.entry-issuer {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entry-name {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entry-otp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.otp-code {
+  font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+  font-size: 20px;
+  font-weight: 700;
+  color: #5c7cfa;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.otp-code:hover {
+  color: #748ffc;
+}
+
+.otp-code.copied {
+  color: #2ecc71;
+}
+
+/* --- Countdown ring --- */
+
+.countdown-ring {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.countdown-ring svg {
+  transform: rotate(-90deg);
+}
+
+.countdown-ring circle {
+  fill: none;
+  stroke-width: 3;
+}
+
+.countdown-ring .bg {
+  stroke: #1f3460;
+}
+
+.countdown-ring .fg {
+  stroke: #5c7cfa;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s;
+}
+
+.countdown-ring .fg.warning {
+  stroke: #e67e22;
+}
+
+.countdown-ring .fg.critical {
+  stroke: #e74c3c;
+}
+
+.countdown-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: #888;
+}
