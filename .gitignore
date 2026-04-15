@@ -54,3 +54,9 @@ docs/plans/
 # Firefox extension artifacts
 firefox/web-ext-artifacts/
 firefox/*.xpi
+
+# CodeGraph
+.codegraph/
+
+# Node
+.nvmrc
