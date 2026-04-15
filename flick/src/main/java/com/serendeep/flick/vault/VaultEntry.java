@@ -3,6 +3,7 @@ package com.serendeep.flick.vault;
 import com.serendeep.flick.otp.OtpInfo;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -29,6 +30,23 @@ public class VaultEntry {
         _favorite = favorite;
         _otpInfo = otpInfo;
         _groups = groups;
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        obj.put("type", _type);
+        obj.put("uuid", _uuid);
+        obj.put("name", _name);
+        obj.put("issuer", _issuer);
+        obj.put("note", _note);
+        obj.put("favorite", _favorite);
+        obj.put("info", _otpInfo.toJson());
+        JSONArray groupsArr = new JSONArray();
+        for (String group : _groups) {
+            groupsArr.put(group);
+        }
+        obj.put("groups", groupsArr);
+        return obj;
     }
 
     public static VaultEntry fromJson(JSONObject obj) throws VaultParseException {

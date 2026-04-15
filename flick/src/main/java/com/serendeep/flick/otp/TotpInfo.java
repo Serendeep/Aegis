@@ -1,5 +1,8 @@
 package com.serendeep.flick.otp;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class TotpInfo extends OtpInfo {
     public static final int DEFAULT_PERIOD = 30;
 
@@ -18,6 +21,13 @@ public class TotpInfo extends OtpInfo {
     public String getOtp(long time) throws OtpException {
         long counter = (long) Math.floor((double) time / _period);
         return HotpInfo.generateOtp(_secret, getHmacAlgorithm(), _digits, counter);
+    }
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = super.toJson();
+        obj.put("period", _period);
+        return obj;
     }
 
     @Override

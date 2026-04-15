@@ -3,6 +3,7 @@ package com.serendeep.flick.otp;
 import com.google.common.io.BaseEncoding;
 import com.serendeep.flick.vault.VaultParseException;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public abstract class OtpInfo {
@@ -37,6 +38,14 @@ public abstract class OtpInfo {
 
     public int getDigits() {
         return _digits;
+    }
+
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        obj.put("secret", BaseEncoding.base32().encode(_secret));
+        obj.put("algo", _algorithm);
+        obj.put("digits", _digits);
+        return obj;
     }
 
     public static OtpInfo fromJson(String type, JSONObject obj) throws VaultParseException {

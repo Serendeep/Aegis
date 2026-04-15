@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.serendeep.flick.vault.UrlMappingStore;
 import com.serendeep.flick.vault.VaultAccessManager;
+import com.serendeep.flick.vault.VaultCacheManager;
 import com.serendeep.flick.vault.VaultHolder;
 
 import javax.inject.Singleton;
@@ -27,6 +28,12 @@ public class FlickModule {
     @Singleton
     public VaultAccessManager provideVaultAccessManager(@ApplicationContext Context context) {
         return new VaultAccessManager(context);
+    }
+
+    @Provides
+    @Singleton
+    public VaultCacheManager provideVaultCacheManager(@ApplicationContext Context context) {
+        return new VaultCacheManager(context);
     }
 
     @Provides

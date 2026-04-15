@@ -9,10 +9,13 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
+import androidx.core.content.ContextCompat;
+
 import com.serendeep.flick.otp.EntryMatcher;
 import com.serendeep.flick.ui.QuickAuthActivity;
 import com.serendeep.flick.ui.views.OtpBubbleView;
 import com.serendeep.flick.vault.UrlMappingStore;
+import com.serendeep.flick.vault.VaultCacheManager;
 import com.serendeep.flick.vault.VaultEntry;
 import com.serendeep.flick.vault.VaultHolder;
 
@@ -29,6 +32,7 @@ public class OtpAccessibilityService extends AccessibilityService
 
     @Inject VaultHolder _vaultHolder;
     @Inject UrlMappingStore _urlMappingStore;
+    @Inject VaultCacheManager _vaultCache;
 
     private OtpBubbleView _bubbleView;
     private String _lastMatchedPkg = "";
@@ -51,6 +55,7 @@ public class OtpAccessibilityService extends AccessibilityService
         public void onReceive(Context context, Intent intent) {
             if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
                 _vaultHolder.lock();
+                _vaultCache.clearCache();
                 if (_bubbleView != null) {
                     _bubbleView.hide();
                 }
@@ -72,6 +77,19 @@ public class OtpAccessibilityService extends AccessibilityService
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
+
+        // Start foreground service to prevent OEM killing
+        Intent fgIntent = new Intent(this, FlickForegroundService.class);
+        ContextCompat.startForegroundService(this, fgIntent);
+
+        // Recover vault from cache if not already loaded
+        if (!_vaultHolder.isLoaded()) {
+            List<VaultEntry> cached = _vaultCache.getCachedEntries();
+            if (cached != null && !cached.isEmpty()) {
+                _vaultHolder.setEntries(cached);
+            }
+        }
+
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         _bubbleView = new OtpBubbleView(this, wm, this);
         _bubbleView.setUnlocked(_vaultHolder.isUnlocked());
@@ -101,6 +119,8 @@ public class OtpAccessibilityService extends AccessibilityService
         if (_bubbleView != null) {
             _bubbleView.onAuthSucceeded();
         }
+        // Repopulate cache after re-authentication
+        _vaultCache.cacheEntries(_vaultHolder.getEntries());
     }
 
     @Override
@@ -190,6 +210,8 @@ public class OtpAccessibilityService extends AccessibilityService
             unregisterReceiver(_authCancelledReceiver);
         } catch (IllegalArgumentException ignored) {
         }
+        // Stop foreground service when accessibility service is unbound
+        stopService(new Intent(this, FlickForegroundService.class));
         return super.onUnbind(intent);
     }
 

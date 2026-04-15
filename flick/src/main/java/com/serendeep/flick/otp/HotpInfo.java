@@ -1,5 +1,8 @@
 package com.serendeep.flick.otp;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -17,6 +20,13 @@ public class HotpInfo extends OtpInfo {
     @Override
     public String getOtp() throws OtpException {
         return generateOtp(_secret, getHmacAlgorithm(), _digits, _counter);
+    }
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = super.toJson();
+        obj.put("counter", _counter);
+        return obj;
     }
 
     @Override
