@@ -55,3 +55,9 @@ docs/plans/
 firefox/web-ext-artifacts/
 firefox/*.xpi
 firefox/.amo-upload-uuid
+
+# CodeGraph
+.codegraph/
+
+# Node
+.nvmrc
